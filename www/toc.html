@@ -1,0 +1,35 @@
+<!-- table of content i.e. toc -->
+<ons-page id="toc-page">
+
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button onclick="utopiasoftware.emap.controller.tocPageViewModel.backButtonClicked()">
+                <ons-icon icon="md-long-arrow-left"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">EXCO Meeting Agenda</div>
+        <div class="right">
+        </div>
+    </ons-toolbar>
+
+    <div style="position: fixed; top: 58px; display: block; width: 100%;">
+
+        <!-- section holds the custom-date-picker container row -->
+        <ons-row id="toc-custom-date-container" valign="middle" style="margin-top: 0; padding-top: 0;">
+            <ons-col width="25%" style="margin-top: 0; padding-top: 0;">
+            </ons-col>
+            <ons-col width="50%" style="margin-top: 0; padding-top: 0; text-align: center">
+                <input id="toc-date-picker" type="text" class="ally-input-tooltip"
+                       title="use date picker button to select range">
+            </ons-col>
+            <ons-col width="25%" style="margin-top: 0; padding-top: 0;">
+            </ons-col>
+        </ons-row>
+    </div>
+
+    <div class="content" style="position: absolute; top: 7.5em;"> <!-- content of the page begins -->
+        <!-- div holds the grid for toc -->
+        <div id="toc-grid" style="height: 100% !important;"></div>
+    </div>
+
+</ons-page>

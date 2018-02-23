@@ -1,0 +1,15 @@
+.toc-grid-sno-column {
+    font-size: 1.15em !important;
+}
+.toc-grid-subject-column {
+    font-size: 1.15em !important;
+    text-transform: uppercase;
+}
+.toc-grid-agenda-column {
+    font-size: 1.15em !important;
+    text-transform: capitalize;
+}
+.toc-grid-attachments-filename-column {
+    color: #00008b !important;
+    font-size: 1.15em !important;
+}
