@@ -93,6 +93,7 @@
     </platform>
 
 
+    <!--
     <icon platform="android" src="package-assets/ldpi_icon.png" width="36" height="36" density="ldpi"/>
     <icon platform="android" src="package-assets/mdpi_icon.png" width="48" height="48" density="mdpi"/>
     <icon platform="android" src="package-assets/hdpi_icon.png" width="72" height="72" density="hdpi"/>
@@ -106,7 +107,7 @@
     <splash platform="android" src="package-assets/mdpi_landscape.png" width="470" height="320" orientation="landscape" density="land-mdpi"/>
     <splash platform="android" src="package-assets/hdpi_landscape.png" width="640" height="480" orientation="landscape" density="land-hdpi"/>
     <splash platform="android" src="package-assets/xhdpi_landscape.png" width="960" height="720" orientation="landscape" density="land-xhdpi"/>
-
+    -->
 
     <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:launchMode='singleTop']" mode="merge">
         <activity android:launchMode="singleTop" />
