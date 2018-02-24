@@ -249,8 +249,8 @@ utopiasoftware.emap.controller = {
                 }).then(function (rootDir) {
                     // get the device root directory
                     return new Promise(function (resolve, reject) {
-                        // read from the EMAP/[MEETING-DATE] directory contained in the root directory
-                        rootDir.getDirectory("EMAP/" + directoryName, { create: false }, resolve, reject);
+                        // read from the EMAPP/[MEETING-DATE] directory contained in the root directory
+                        rootDir.getDirectory("EMAPP/" + directoryName, { create: false }, resolve, reject);
                     });
                 }).then(function (meetingDir) {
                     console.log(meetingDir.toURL());
@@ -295,6 +295,11 @@ utopiasoftware.emap.controller = {
                     $(buttonElem).attr('data-emap-grid-row-state', "collapsed");
                     break;
             }
+        },
+
+        viewAttachment: function viewAttachment(fileurl) {
+            // get the absolute url for the atachment to be displayed
+            var absoluteURL = cordova.file.externalRootDirectory + "EMAPP/" + kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, 'yyyy-MM-dd') + "/ATTACHMENTS/" + fileurl;
         }
     }
 };
