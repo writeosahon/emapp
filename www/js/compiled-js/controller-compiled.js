@@ -45,6 +45,7 @@ utopiasoftware.emap.controller = {
 
             // set status bar color
             StatusBar.backgroundColorByHexString("#DC723D");
+            navigator.splashscreen.hide(); // hide the splashscreen
 
             utopiasoftware.emap.model.isAppReady = true; // true that app is fully loaded and ready
 
@@ -235,8 +236,16 @@ utopiasoftware.emap.controller = {
                 mainPromiseReject = mainReject;
 
                 new Promise(function (resolve, reject) {
-                    // return the directory where to store the document/image
-                    window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, resolve, reject);
+                    // request file read write permissions
+                    cordova.plugins.diagnostic.requestRuntimePermissions(resolve, reject, [cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE, cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
+                }).then(function (statuses) {
+                    if (!(statuses[cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE] === cordova.plugins.diagnostic.permissionStatus.GRANTED || statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE] === cordova.plugins.diagnostic.permissionStatus.GRANTED)) {
+                        throw "error";
+                    }
+                    return new Promise(function (resolve, reject) {
+                        // return the directory where to store the document/image
+                        window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, resolve, reject);
+                    });
                 }).then(function (rootDir) {
                     // get the device root directory
                     return new Promise(function (resolve, reject) {
