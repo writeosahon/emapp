@@ -205,7 +205,7 @@ utopiasoftware.emap.controller = {
                         toolbar: ['search'],
                         columns: [
                             { field: 'sno',
-                                headerText: '<div style="color: #f28340; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">SNo</div>',
+                                headerText: '<div style="color: #f28340; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">S/N</div>',
                                 width: "10%", clipMode: 'ellipsiswithtooltip', customAttributes: {
                                 class: 'toc-grid-sno-column'}
                             },
@@ -334,6 +334,17 @@ utopiasoftware.emap.controller = {
             var absoluteURL = cordova.file.externalRootDirectory + "EMAPP/" +
                 kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, 'yyyy-MM-dd') +
                     "/ATTACHMENTS/" + fileurl;
+
+            new Promise(function(resolve, reject){
+                cordova.plugins.fileOpener2.showOpenWithDialog(
+                    absoluteURL,
+                    'application/pdf',
+                    {
+                        error : reject,
+                        success : resolve
+                    }
+                );
+            });
 
         }
     }
