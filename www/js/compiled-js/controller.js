@@ -333,10 +333,10 @@ utopiasoftware.emap.controller = {
             // get the absolute url for the atachment to be displayed
             var absoluteURL = cordova.file.externalRootDirectory + "EMAPP/" +
                 kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, 'yyyy-MM-dd') +
-                    "/ATTACHMENTS/" + fileurl;
+                    "/ATTACHMENTS/" + fileurl + ".pdf";
             console.log("FILE URL ", absoluteURL);
 
-            /*new Promise(function(resolve, reject){
+            new Promise(function(resolve, reject){
                 cordova.plugins.fileOpener2.showOpenWithDialog(
                     absoluteURL,
                     'application/pdf',
@@ -345,7 +345,7 @@ utopiasoftware.emap.controller = {
                         success : resolve
                     }
                 );
-            });*/
+            });
 
         }
     }
