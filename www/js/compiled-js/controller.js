@@ -334,6 +334,7 @@ utopiasoftware.emap.controller = {
             var absoluteURL = cordova.file.externalRootDirectory + "EMAPP/" +
                 kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, 'yyyy-MM-dd') +
                     "/ATTACHMENTS/" + fileurl;
+            console.log("FILE URL ", absoluteURL);
 
             new Promise(function(resolve, reject){
                 cordova.plugins.fileOpener2.showOpenWithDialog(
