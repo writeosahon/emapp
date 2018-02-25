@@ -46,9 +46,9 @@
 
     <plugin name="cordova-plugin-whitelist" spec="1.2.2"/>
 
-    <edit-config file="AndroidManifest.xml" target="/manifest/uses-permission" mode="merge">
+    <!--<edit-config file="AndroidManifest.xml" target="/manifest/uses-permission" mode="merge">
         <uses-permission android:name="android.permission.INTERNET" />
-    </edit-config>
+    </edit-config>-->
 
     <!--<config-file platform="android" parent="/*" mode="merge">
         <uses-permission android:name="android.permission.INTERNET" />
@@ -57,6 +57,7 @@
     <preference name="AndroidPersistentFileLocation" value="Internal" />
 
     <edit-config file="AndroidManifest.xml" target="/manifest/uses-permission" mode="merge">
+        <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     </edit-config>
