@@ -336,7 +336,7 @@ utopiasoftware.emap.controller = {
                     "/ATTACHMENTS/" + fileurl;
             console.log("FILE URL ", absoluteURL);
 
-            new Promise(function(resolve, reject){
+            /*new Promise(function(resolve, reject){
                 cordova.plugins.fileOpener2.showOpenWithDialog(
                     absoluteURL,
                     'application/pdf',
@@ -345,7 +345,7 @@ utopiasoftware.emap.controller = {
                         success : resolve
                     }
                 );
-            });
+            });*/
 
         }
     }
