@@ -297,7 +297,8 @@ utopiasoftware.emap.controller = {
             }
         },
 
-        viewAttachment: function viewAttachment(fileurl, buttonElem) {
+        viewAttachment: function viewAttachment(buttonElem) {
+            var fileurl = $(buttonElem).attr('data-emap-fileurl');
             // get the absolute url for the atachment to be displayed
             var absoluteURL = cordova.file.externalRootDirectory + "EMAPP/" + kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, 'yyyy-MM-dd') + "/ATTACHMENTS/" + fileurl;
             console.log("FILE URL ", absoluteURL);
