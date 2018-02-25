@@ -54,8 +54,10 @@
 
     <script id="view-attachment-column-template" type="text/x-template">
         <ons-button style="text-transform: capitalize;
-        color: #00008b; background-color: #ffffff; border-color: #00008b; width: 98%; font-size: 1em; text-align: center" disable-auto-styling modifier="outline"
-                    onclick="utopiasoftware.emap.controller.tocPageViewModel.viewAttachment('"${fileurl}"', this)">View</ons-button>
+        color: #00008b; background-color: #ffffff; border-color: #00008b; width: 98%; font-size: 1em; text-align: center"
+                    disable-auto-styling modifier="outline"
+                    data-emap-fileurl=${fileurl}
+                    onclick=utopiasoftware.emap.controller.tocPageViewModel.viewAttachment('${fileurl}', this)>View</ons-button>
     </script>
 
     <!-- Content-Security-Policy tag -->

@@ -50,14 +50,13 @@
         <uses-permission android:name="android.permission.INTERNET" />
     </edit-config>-->
 
-    <!--<config-file platform="android" parent="/*" mode="merge">
+    <config-file platform="android" target="AndroidManifest.xml" parent="/manifest">
         <uses-permission android:name="android.permission.INTERNET" />
-    </config-file>-->
+    </config-file>
 
     <preference name="AndroidPersistentFileLocation" value="Internal" />
 
     <edit-config file="AndroidManifest.xml" target="/manifest/uses-permission" mode="merge">
-        <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     </edit-config>
