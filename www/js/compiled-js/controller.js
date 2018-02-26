@@ -197,6 +197,8 @@ utopiasoftware.emap.controller = {
                     utopiasoftware.emap.controller.tocPageViewModel.tocGrid.destroy();
                 }
 
+                $('#toc-exco-member-number').html(dataObject.exco_member_number);
+
                 utopiasoftware.emap.controller.tocPageViewModel.tocGrid =
                     new ej.grids.Grid({
                         // Width for grid
@@ -263,6 +265,7 @@ utopiasoftware.emap.controller = {
                     ])
                 }).
                 then(function(statuses){
+                    console.log("READ", statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
                     if(! (statuses[cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE] ===
                         cordova.plugins.diagnostic.permissionStatus.GRANTED ||
                         statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE] ===
@@ -306,8 +309,9 @@ utopiasoftware.emap.controller = {
                     console.log(fileContent);
                     mainPromiseResolve(JSON.parse(fileContent));
                 }).
-                catch(function(){
-                    mainPromiseResolve({toc: [], attachments: []});
+                catch(function(err){
+                    console.log("ERROR", err);
+                    mainPromiseResolve({toc: [], attachments: [], exco_member_number: ""});
                 });
             });
 
