@@ -197,8 +197,6 @@ utopiasoftware.emap.controller = {
                     utopiasoftware.emap.controller.tocPageViewModel.tocGrid.destroy();
                 }
 
-                $('#toc-exco-member-number').html(dataObject.exco_member_number);
-
                 utopiasoftware.emap.controller.tocPageViewModel.tocGrid =
                     new ej.grids.Grid({
                         // Width for grid
@@ -311,7 +309,7 @@ utopiasoftware.emap.controller = {
                 }).
                 catch(function(err){
                     console.log("ERROR", err);
-                    mainPromiseResolve({toc: [], attachments: [], exco_member_number: ""});
+                    mainPromiseResolve({toc: [], attachments: []});
                 });
             });
 
