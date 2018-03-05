@@ -7,7 +7,7 @@
     <content src="index.html"/>
 
     <preference name="android-build-tool" value="gradle" />
-    <preference name="SplashScreen" value="splash" />
+    <!--<preference name="SplashScreen" value="splash" />-->
 
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
@@ -36,7 +36,7 @@
     </config-file>-->
 
     <plugin name="cordova-plugin-statusbar" spec="2.1.3"/>
-    <plugin name="cordova-plugin-splashscreen" spec="3.2.2"/>
+    <plugin name="cordova-plugin-splashscreen" spec="5.0.2"/>
     <plugin name="cordova-plugin-screen-orientation" spec="1.4.2"/>
     <plugin name="cordova-plugin-network-information" spec="1.2.1"/>
 
@@ -98,14 +98,16 @@
     <icon platform="android" src="package-assets/hdpi_icon.png" width="72" height="72" density="hdpi"/>
     <icon platform="android" src="package-assets/xhdpi_icon.png" width="96" height="96" density="xhdpi" />
 
-    <splash platform="android" src="package-assets/ldpi_portrait.png" width="320" height="426" orientation="portrait" qualifier="port-ldpi" />
-    <splash platform="android" src="package-assets/mdpi_portrait.png" width="320" height="470" orientation="portrait" qualifier="port-mdpi" />
-    <splash platform="android" src="package-assets/hdpi_portrait.png" width="480" height="640" orientation="portrait" qualifier="port-hdpi" />
-    <splash platform="android" src="package-assets/xhdpi_portrait.png" width="720" height="960" orientation="portrait" qualifier="port-xhdpi"/>
-    <splash platform="android" src="package-assets/ldpi_landscape.png" width="426" height="320" orientation="landscape" qualifier="land-ldpi"/>
-    <splash platform="android" src="package-assets/mdpi_landscape.png" width="470" height="320" orientation="landscape" qualifier="land-mdpi"/>
-    <splash platform="android" src="package-assets/hdpi_landscape.png" width="640" height="480" orientation="landscape" qualifier="land-hdpi"/>
-    <splash platform="android" src="package-assets/xhdpi_landscape.png" width="960" height="720" orientation="landscape" qualifier="land-xhdpi"/>
+    <platform name="android">
+    <splash src="package-assets/ldpi_portrait.png" width="320" height="426" orientation="portrait" density="port-ldpi" />
+    <splash src="package-assets/mdpi_portrait.png" width="320" height="470" orientation="portrait" density="port-mdpi" />
+    <splash src="package-assets/hdpi_portrait.png" width="480" height="640" orientation="portrait" density="port-hdpi" />
+    <splash src="package-assets/xhdpi_portrait.png" width="720" height="960" orientation="portrait" density="port-xhdpi"/>
+    <splash src="package-assets/ldpi_landscape.png" width="426" height="320" orientation="landscape" density="land-ldpi"/>
+    <splash src="package-assets/mdpi_landscape.png" width="470" height="320" orientation="landscape" density="land-mdpi"/>
+    <splash src="package-assets/hdpi_landscape.png" width="640" height="480" orientation="landscape" density="land-hdpi"/>
+    <splash src="package-assets/xhdpi_landscape.png" width="960" height="720" orientation="landscape" density="land-xhdpi"/>
+    </platform>
 
     <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:launchMode='singleTop']" mode="merge">
         <activity android:launchMode="singleTop" />
