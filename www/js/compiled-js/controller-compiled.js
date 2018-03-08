@@ -103,7 +103,7 @@ utopiasoftware.emap.controller = {
                     // sets the min date
                     //min: new Date(),
                     //sets the max date
-                    max: new Date(),
+                    //max: new Date(),
                     format: 'yyyy-MM-dd',
                     focus: function focus() {
                         // listen for when component has focus
