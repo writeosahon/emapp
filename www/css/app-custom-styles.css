@@ -1,3 +1,10 @@
+#toc-page .page--material__content {
+    background-color: #ffffff;
+}
+#toc-page .page--material__background {
+    background-color: #ffffff;
+}
+
 .toc-grid-sno-column {
     font-size: 1.15em !important;
 }
