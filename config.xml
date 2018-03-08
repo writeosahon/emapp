@@ -58,7 +58,7 @@
 
     <edit-config file="AndroidManifest.xml" target="/manifest/uses-permission" mode="merge">
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
     </edit-config>
 
     <!--<config-file platform="android" target="AndroidManifest.xml" parent="/*" mode="merge">
