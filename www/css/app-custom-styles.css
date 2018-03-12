@@ -1,3 +1,38 @@
+
+#signup-page .page--material__background {
+    background-image: linear-gradient(0deg, rgba(255, 255, 255,0.3) 0%, rgba(255, 255, 255,0.3) 100%),
+    url('images/hdpi_portrait.jpg');
+    background-repeat: repeat, no-repeat;
+    background-size: contain, cover;
+}
+
+
+
+/** STYLE FOR THE SIGNUP INPUT BEGINS **/
+#signup-page #signup-password {
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+#signup-page #signup-password input {
+    font-size: 0.7em;
+    height: 1.2em;
+    line-height: 1.2em;
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+#signup-page #signup-confirm-password {
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+#signup-page #signup-confirm-password input {
+    font-size: 0.7em;
+    height: 1.2em;
+    line-height: 1.2em;
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+
+
 #toc-page .page--material__content {
     background-color: #ffffff;
 }

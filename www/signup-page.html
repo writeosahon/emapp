@@ -1,0 +1,69 @@
+
+<!-- signup page -->
+<ons-page id="signup-page">
+    <ons-toolbar modifier="transparent">
+        <div class="left">
+            <ons-toolbar-button
+                    onclick="utopiasoftware.emap.controller.signupPageViewModel.backButtonClicked();">
+                <ons-icon icon="md-forward" rotate="180" size="32px" style="color: #DC723D;"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center" style="text-align: center; text-shadow: -1px -1px 1px #DC723D; font-size: 2em">Sign Up</div>
+        <div class="right">
+        </div>
+    </ons-toolbar>
+    <div style="position: relative; width: 100%; height: 100%; top: 0; bottom: 0; display: flex;
+            flex-direction: column; flex-wrap: nowrap; justify-content: space-around; align-items: center">
+        <div style=" display: block; flex-basis: auto; width: 80%; min-height: 100px; margin-top: 2em; text-align: center">
+            <img src="css/images/xhdpi_icon.png"
+                 style="width: 100px; vertical-align: middle; margin-right: 6px">
+                <span style="font-size: 2.5em; font-weight: bold; text-transform: capitalize;display: inline-block;
+                color: #ffffff; text-shadow: -1px -1px 1px #DC723D;">
+                    Edo EMAPP
+                </span>
+        </div>
+
+        <div style="background-color: transparent; border-radius: 1em; min-height: 40%; width: 80%;
+                flex-basis: auto">
+            <form id="signup-form" autocomplete="off" data-parsley-inputs="ons-input,textarea,select"
+                  data-parsley-excluded="ons-input[type=button], ons-input[type=submit],
+                              ons-input[type=reset], ons-input[type=hidden], [disabled], :hidden">
+
+                <ons-row vertical-align="bottom" style="margin-bottom: 1.5em; text-align: center;">
+                    <ons-col width="100%" style="border: 2px solid #ffffff; background-color: #696969; color: #ffffff;
+                    font-size: 2em; padding-top:0.5em;">
+                        <ons-icon icon="md-lock" size="35px" style="color: #000000; margin-right: 0.5em;"></ons-icon>
+                        <ons-input id="signup-password" type="password" style="width: 80%;
+                        caret-color: #ffffff !important; color: #ffffff !important;" required
+                                   placeholder="New Password" disable-auto-styling
+                                   data-parsley-required-message="your phone number is required"
+                                   data-parsley-pattern-message="incorrect phone number format. phone number must be in international format (starting with '+')"
+                                   data-parsley-type-message="incorrect phone number format. phone number must be in international format (starting with '+')"
+                                   class="hint--top"></ons-input>
+                    </ons-col>
+                </ons-row>
+                <ons-row style="margin-bottom: 4em; text-align: center;">
+                    <ons-col width="100%" style="border: 2px solid #ffffff; background-color: #696969; color: #ffffff;
+                    font-size: 2em; padding-top:0.5em;">
+                        <ons-icon icon="md-check-all" size="35px" style="color: #000000; margin-right: 0.5em;"></ons-icon>
+                        <ons-input id="signup-confirm-password" type="password" style="width: 80%;
+                        caret-color: #ffffff !important;  color: #ffffff !important;" required
+                                   placeholder="Confirm Password" disable-auto-styling
+                                   data-parsley-required-message="your phone number is required"
+                                   data-parsley-pattern-message="incorrect phone number format. phone number must be in international format (starting with '+')"
+                                   data-parsley-type-message="incorrect phone number format. phone number must be in international format (starting with '+')"
+                                   class="hint--top"></ons-input>
+                    </ons-col>
+                </ons-row>
+                <ons-row style="margin-bottom: 2.2em;">
+                    <ons-col style="text-align: center">
+                        <ons-button id="signup-signup-button" disable-auto-styling modifier="large"
+                                    style="background-color: #DC723D; color: #ffffff;">
+                            Sign Up
+                        </ons-button>
+                    </ons-col>
+                </ons-row>
+            </form>
+        </div>
+    </div>
+</ons-page>

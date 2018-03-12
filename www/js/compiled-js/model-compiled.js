@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Created by UTOPIA SOFTWARE on 19/02/2018.
  */
@@ -18,6 +20,18 @@ utopiasoftware.emap.model = {
 // call the method to startup the app
 utopiasoftware.emap.controller.startup();
 
+// listen for the initialisation of the SIGNUP page
+$(document).on("init", "#signup-page", utopiasoftware.emap.controller.signupPageViewModel.pageInit);
+
+// listen for when the SIGNUP page is shown
+$(document).on("show", "#signup-page", utopiasoftware.emap.controller.signupPageViewModel.pageShow);
+
+// listen for when the SIGNUP page is hidden
+$(document).on("hide", "#signup-page", utopiasoftware.emap.controller.signupPageViewModel.pageHide);
+
+// listen for when the SIGNUP page is destroyed
+$(document).on("destroy", "#signup-page", utopiasoftware.emap.controller.signupPageViewModel.pageDestroy);
+
 // listen for the initialisation of the TOC page
 $(document).on("init", "#toc-page", utopiasoftware.emap.controller.tocPageViewModel.pageInit);
 
@@ -26,5 +40,8 @@ $(document).on("show", "#toc-page", utopiasoftware.emap.controller.tocPageViewMo
 
 // listen for when the TOC page is hidden
 $(document).on("hide", "#toc-page", utopiasoftware.emap.controller.tocPageViewModel.pageHide);
+
+// listen for when the TOC page is destroyed
+$(document).on("destroy", "#toc-page", utopiasoftware.emap.controller.tocPageViewModel.pageDestroy);
 
 //# sourceMappingURL=model-compiled.js.map

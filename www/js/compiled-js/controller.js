@@ -26,16 +26,22 @@ utopiasoftware.emap.controller = {
                 // does nothing for now!!
             });
 
-            if(utopiasoftware.emap.model.isAppReady === false){ // if app has not completed loading
-                // displaying prepping message
-                $('#loader-modal-message').html("Loading App...");
-                $('#loader-modal').get(0).show(); // show loader
+            // displaying prepping message
+            $('#loader-modal-message').html("Loading App...");
+            //$('#loader-modal').get(0).show(); // show loader
+
+            if(localStorage.getItem("app-status") && localStorage.getItem("app-status") !== ""){ // there is a previous logged in user
+
+            }
+            else{ // no previous logged in user
+                // load the signup page
+                $('ons-splitter').get(0).content.load("signup-template");
             }
 
             // load the app 1st page
-            $('ons-splitter').get(0).content.load("app-main-template");
+            //$('ons-splitter').get(0).content.load("app-main-template");
 
-            // START CORDOVA PLUGIN CONFIGURATIONS
+            // START ALL CORDOVA PLUGINS CONFIGURATIONS
             try {
                 // lock the orientation of the device to 'PORTRAIT'
                 screen.lockOrientation('portrait');
@@ -53,6 +59,88 @@ utopiasoftware.emap.controller = {
 
     },
 
+
+    /**
+     * object is the view-model of the signup page
+     */
+    signupPageViewModel: {
+
+        /**
+         * event is triggered when page is initialised
+         */
+        pageInit: function(event){
+
+            var $thisPage = $(event.target); // get the current page shown
+            // disable the swipeable feature for the app splitter
+            $('ons-splitter-side').removeAttr("swipeable");
+
+            // call the function used to initialise the app page if the app is fully loaded
+            loadPageOnAppReady();
+
+            //function is used to initialise the page if the app is fully ready for execution
+            function loadPageOnAppReady(){
+                // check to see if onsen is ready and if all app loading has been completed
+                if(!ons.isReady() || utopiasoftware.emap.model.isAppReady === false){
+                    setTimeout(loadPageOnAppReady, 500); // call this function again after half a second
+                    return;
+                }
+
+                // listen for the back button event
+                $thisPage.get(0).onDeviceBackButton = utopiasoftware.emap.controller.signupPageViewModel.backButtonClicked;
+
+                // hide the loader
+                $('#loader-modal').get(0).hide();
+
+            }
+
+        },
+
+        /**
+         * method is triggered when page is shown
+         */
+        pageShow: function(){
+            // disable the swipeable feature for the app splitter
+            $('ons-splitter-side').removeAttr("swipeable");
+            //$('#menu-tabbar .tabbar__border').css("visibility", "hidden");
+        },
+
+
+        /**
+         * method is triggered when page is hidden
+         */
+        pageHide: function(){
+            // stop the rotating animation on main menu page
+            //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
+        },
+
+        /**
+         * method is triggered when page is destroyed
+         */
+        pageDestroy: function(){
+            // stop the rotating animation on main menu page
+            //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
+        },
+
+        /**
+         * method is triggered when back button or device back button is clicked
+         */
+        backButtonClicked: function(){
+
+            // check if the side menu is open
+            if($('ons-splitter').get(0).right.isOpen){ // side menu open, so close it
+                $('ons-splitter').get(0).right.close();
+                return; // exit the method
+            }
+
+            ons.notification.confirm('Do you want to close the app?', {title: 'Exit App',
+                    buttonLabels: ['No', 'Yes']}) // Ask for confirmation
+                .then(function(index) {
+                    if (index === 1) { // OK button
+                        navigator.app.exitApp(); // Close the app
+                    }
+                });
+        }
+    },
 
     /**
      * object is view-model for toc page
@@ -151,6 +239,14 @@ utopiasoftware.emap.controller = {
          * method is triggered when page is hidden
          */
         pageHide: function(){
+            // stop the rotating animation on main menu page
+            //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
+        },
+
+        /**
+         * method is triggered when page is destroyed
+         */
+        pageDestroy: function(){
             // stop the rotating animation on main menu page
             //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
         },
