@@ -36,9 +36,7 @@
                         <ons-input id="signup-password" type="password" style="width: 80%;
                         caret-color: #ffffff !important; color: #ffffff !important;" required
                                    placeholder="New Password" disable-auto-styling
-                                   data-parsley-required-message="your phone number is required"
-                                   data-parsley-pattern-message="incorrect phone number format. phone number must be in international format (starting with '+')"
-                                   data-parsley-type-message="incorrect phone number format. phone number must be in international format (starting with '+')"
+                                   data-parsley-required-message="new password is required"
                                    class="hint--top"></ons-input>
                     </ons-col>
                 </ons-row>
@@ -47,12 +45,12 @@
                     font-size: 2em; padding-top:0.5em;">
                         <ons-icon icon="md-check-all" size="35px" style="color: #000000; margin-right: 0.5em;"></ons-icon>
                         <ons-input id="signup-confirm-password" type="password" style="width: 80%;
-                        caret-color: #ffffff !important;  color: #ffffff !important;" required
+                        caret-color: #ffffff !important; color: #ffffff !important;" required
                                    placeholder="Confirm Password" disable-auto-styling
-                                   data-parsley-required-message="your phone number is required"
-                                   data-parsley-pattern-message="incorrect phone number format. phone number must be in international format (starting with '+')"
-                                   data-parsley-type-message="incorrect phone number format. phone number must be in international format (starting with '+')"
-                                   class="hint--top"></ons-input>
+                                   data-parsley-equalto="#signup-password"
+                                   data-parsley-required-message="confirm password"
+                                   data-parsley-equalto-message="your password does not match"
+                                   class="hint--bottom"></ons-input>
                     </ons-col>
                 </ons-row>
                 <ons-row style="margin-bottom: 2.2em;">

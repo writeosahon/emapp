@@ -63,6 +63,11 @@ utopiasoftware.emap.controller = {
     signupPageViewModel: {
 
         /**
+         * used to hold the parsley form validation object for the page
+         */
+        formValidator: null,
+
+        /**
          * event is triggered when page is initialised
          */
         pageInit: function pageInit(event) {
@@ -84,6 +89,33 @@ utopiasoftware.emap.controller = {
 
                 // listen for the back button event
                 $thisPage.get(0).onDeviceBackButton = utopiasoftware.emap.controller.signupPageViewModel.backButtonClicked;
+
+                // initialise the form validation
+                utopiasoftware.emap.controller.signupPageViewModel.formValidator = $('#signup-form').parsley();
+
+                // attach listener for the sign up button on the page
+                $('#signup-signup-button').get(0).onclick = function () {
+                    // run the validation method for the form
+                    utopiasoftware.emap.controller.signupPageViewModel.formValidator.whenValidate();
+                };
+
+                // listen for form field validation failure event
+                utopiasoftware.emap.controller.signupPageViewModel.formValidator.on('field:error', function (fieldInstance) {
+                    // get the element that triggered the field validation error and use it to display tooltip
+                    // display tooltip
+                    $(fieldInstance.$element).addClass("hint--always hint--warning hint--medium hint--rounded hint--no-animate");
+                    $(fieldInstance.$element).attr("data-hint", fieldInstance.getErrorsMessages()[0]);
+                });
+
+                // listen for the form field validation success event
+                utopiasoftware.emap.controller.signupPageViewModel.formValidator.on('field:success', function (fieldInstance) {
+                    // remove tooltip from element
+                    $(fieldInstance.$element).removeClass("hint--always hint--warning hint--medium hint--rounded hint--no-animate");
+                    $(fieldInstance.$element).removeAttr("data-hint");
+                });
+
+                // listen for the form validation success
+                utopiasoftware.emap.controller.signupPageViewModel.formValidator.on('form:success', utopiasoftware.emap.controller.signupPageViewModel.signupFormValidated);
 
                 // hide the loader
                 $('#loader-modal').get(0).hide();
@@ -135,6 +167,18 @@ utopiasoftware.emap.controller = {
                     navigator.app.exitApp(); // Close the app
                 }
             });
+        },
+
+        /**
+         * method is triggered when signup form is successfully validated
+         */
+        signupFormValidated: function signupFormValidated() {
+            // get the entered password
+            var userPass = $('#signup-password').val().trim();
+            // set the local storage app-status to the user password
+            localStorage.setItem("app-status", userPass);
+            // load the main page i.e. toc page
+            $('ons-splitter').get(0).content.load("app-main-template");
         }
     },
 
