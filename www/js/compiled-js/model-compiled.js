@@ -32,6 +32,18 @@ $(document).on("hide", "#signup-page", utopiasoftware.emap.controller.signupPage
 // listen for when the SIGNUP page is destroyed
 $(document).on("destroy", "#signup-page", utopiasoftware.emap.controller.signupPageViewModel.pageDestroy);
 
+// listen for the initialisation of the LOGIN page
+$(document).on("init", "#login-page", utopiasoftware.emap.controller.loginPageViewModel.pageInit);
+
+// listen for when the LOGIN page is shown
+$(document).on("show", "#login-page", utopiasoftware.emap.controller.loginPageViewModel.pageShow);
+
+// listen for when the LOGIN page is hidden
+$(document).on("hide", "#login-page", utopiasoftware.emap.controller.loginPageViewModel.pageHide);
+
+// listen for when the LOGIN page is destroyed
+$(document).on("destroy", "#login-page", utopiasoftware.emap.controller.loginPageViewModel.pageDestroy);
+
 // listen for the initialisation of the TOC page
 $(document).on("init", "#toc-page", utopiasoftware.emap.controller.tocPageViewModel.pageInit);
 

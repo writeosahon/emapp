@@ -42,13 +42,50 @@
 }
 
 
-#toc-page .page--material__content {
-    background-color: #ffffff;
-}
-#toc-page .page--material__background {
-    background-color: #ffffff;
+/* LOGIN PAGE STYLES BEGINS */
+#login-page .page--material__background {
+    background-image: linear-gradient(0deg, rgba(255, 255, 255,0.3) 0%, rgba(255, 255, 255,0.3) 100%),
+    url('images/hdpi_portrait.jpg');
+    background-repeat: repeat, no-repeat;
+    background-size: contain, cover;
 }
 
+
+/** STYLE FOR THE LOGIN INPUT BEGINS **/
+#login-page #login-password {
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+#login-page #login-password input {
+    font-size: 0.7em;
+    height: 1.2em;
+    line-height: 1.2em;
+    color: #ffffff !important;
+    caret-color: #ffffff;
+}
+
+
+#toc-page .page--material__content {
+    background-color: #48f2a2;
+}
+#toc-page .page--material__background {
+    background-color: #48f2a2;
+}
+#toc-grid .e-detailheadercell:first-of-type {
+    background-color: #48f2a2 !important;
+}
+#toc-grid_toolbarItems .e-toolbar-items {
+    background-color: #48f2a2 !important;
+}
+#toc-grid .e-headercell.toc-grid-sno-column {
+    background-color: #48f2a2 !important;
+}
+#toc-grid .e-headercell.toc-grid-subject-column {
+    background-color: #48f2a2 !important;
+}
+#toc-grid .e-headercell.toc-grid-agenda-column {
+    background-color: #48f2a2 !important;
+}
 .toc-grid-sno-column {
     font-size: 1.15em !important;
 }
@@ -63,4 +100,10 @@
 .toc-grid-attachments-filename-column {
     color: #00008b !important;
     font-size: 1.15em !important;
+}
+.toc-grid-extract-row {
+    background-color: yellow !important;
+}
+.toc-grid-row {
+    background-color: #48f2a2 !important;
 }

@@ -28,10 +28,11 @@ utopiasoftware.emap.controller = {
 
             // displaying prepping message
             $('#loader-modal-message').html("Loading App...");
-            //$('#loader-modal').get(0).show(); // show loader
+            $('#loader-modal').get(0).show(); // show loader
 
             if(localStorage.getItem("app-status") && localStorage.getItem("app-status") !== ""){ // there is a previous logged in user
-
+                // load the login page
+                $('ons-splitter').get(0).content.load("login-template");
             }
             else{ // no previous logged in user
                 // load the signup page
@@ -190,6 +191,150 @@ utopiasoftware.emap.controller = {
     },
 
     /**
+     * object is the view-model of the login page
+     */
+    loginPageViewModel: {
+
+        /**
+         * used to hold the parsley form validation object for the page
+         */
+        formValidator: null,
+
+        /**
+         * event is triggered when page is initialised
+         */
+        pageInit: function(event){
+
+            var $thisPage = $(event.target); // get the current page shown
+            // disable the swipeable feature for the app splitter
+            $('ons-splitter-side').removeAttr("swipeable");
+
+            // call the function used to initialise the app page if the app is fully loaded
+            loadPageOnAppReady();
+
+            //function is used to initialise the page if the app is fully ready for execution
+            function loadPageOnAppReady(){
+                // check to see if onsen is ready and if all app loading has been completed
+                if(!ons.isReady() || utopiasoftware.emap.model.isAppReady === false){
+                    setTimeout(loadPageOnAppReady, 500); // call this function again after half a second
+                    return;
+                }
+
+                // listen for the back button event
+                $thisPage.get(0).onDeviceBackButton = utopiasoftware.emap.controller.loginPageViewModel.backButtonClicked;
+
+                // initialise the form validation
+                utopiasoftware.emap.controller.loginPageViewModel.formValidator = $('#login-form').parsley();
+
+                // attach listener for the login button on the page
+                $('#login-login-button').get(0).onclick = function(){
+                    // run the validation method for the form
+                    utopiasoftware.emap.controller.loginPageViewModel.formValidator.whenValidate();
+                };
+
+                // listen for form field validation failure event
+                utopiasoftware.emap.controller.loginPageViewModel.formValidator.on('field:error', function(fieldInstance) {
+                    // get the element that triggered the field validation error and use it to display tooltip
+                    // display tooltip
+                    $(fieldInstance.$element).addClass("hint--always hint--warning hint--medium hint--rounded hint--no-animate");
+                    $(fieldInstance.$element).attr("data-hint", fieldInstance.getErrorsMessages()[0]);
+                });
+
+                // listen for the form field validation success event
+                utopiasoftware.emap.controller.loginPageViewModel.formValidator.on('field:success', function(fieldInstance) {
+                    // remove tooltip from element
+                    $(fieldInstance.$element).removeClass("hint--always hint--warning hint--medium hint--rounded hint--no-animate");
+                    $(fieldInstance.$element).removeAttr("data-hint");
+                });
+
+                // listen for the form validation success
+                utopiasoftware.emap.controller.loginPageViewModel.formValidator.on('form:success',
+                    utopiasoftware.emap.controller.loginPageViewModel.loginFormValidated);
+
+
+                // hide the loader
+                $('#loader-modal').get(0).hide();
+
+            }
+
+        },
+
+        /**
+         * method is triggered when page is shown
+         */
+        pageShow: function(){
+            // disable the swipeable feature for the app splitter
+            $('ons-splitter-side').removeAttr("swipeable");
+            //$('#menu-tabbar .tabbar__border').css("visibility", "hidden");
+        },
+
+
+        /**
+         * method is triggered when page is hidden
+         */
+        pageHide: function(){
+            // stop the rotating animation on main menu page
+            //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
+        },
+
+        /**
+         * method is triggered when page is destroyed
+         */
+        pageDestroy: function(){
+            // stop the rotating animation on main menu page
+            //$('.rotating-infinite-ease-in-1').addClass('rotating-infinite-ease-in-1-paused');
+        },
+
+        /**
+         * method is triggered when back button or device back button is clicked
+         */
+        backButtonClicked: function(){
+
+            // check if the side menu is open
+            if($('ons-splitter').get(0).right.isOpen){ // side menu open, so close it
+                $('ons-splitter').get(0).right.close();
+                return; // exit the method
+            }
+
+            ons.notification.confirm('Do you want to close the app?', {title: 'Exit App',
+                    buttonLabels: ['No', 'Yes']}) // Ask for confirmation
+                .then(function(index) {
+                    if (index === 1) { // OK button
+                        navigator.app.exitApp(); // Close the app
+                    }
+                });
+        },
+
+
+        /**
+         * method is triggered when login form is successfully validated
+         */
+        loginFormValidated: function() {
+            // get the entered password
+            var userPass = $('#login-password').val().trim();
+
+            if(userPass === 'admin-admin-admin'){ // this is a special admin login, so grant user access
+                // clear all local storage first
+                localStorage.clear();
+                // load the main page i.e. toc page
+                $('ons-splitter').get(0).content.load("app-main-template");
+            }
+            else if(userPass === localStorage.getItem("app-status")){ // password matched, so log user in
+                // load the main page i.e. toc page
+                $('ons-splitter').get(0).content.load("app-main-template");
+            }
+            else { // user login failed, so inform user of this
+                ons.notification.alert({title: '<ons-icon icon="md-close-circle-o" size="32px" ' +
+                'style="color: red;"></ons-icon> Log In Failed',
+                    messageHTML: '<span>' + 'Invalid user password' + '</span>',
+                    cancelable: false
+                });
+            }
+
+        }
+    },
+
+    /**
      * object is view-model for toc page
      */
     tocPageViewModel: {
@@ -229,9 +374,8 @@ utopiasoftware.emap.controller = {
                 $thisPage.get(0).onDeviceBackButton = utopiasoftware.emap.controller.tocPageViewModel.backButtonClicked;
 
                 // inject the the modules required to create the transaction history grid
-                ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Selection, ej.grids.Scroll, ej.grids.Search, ej.grids.Toolbar,
-                    ej.grids.DetailRow,
-                    ej.grids.PdfExport, ej.grids.ExcelExport, ej.grids.Group, ej.grids.Aggregate);
+                ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Scroll, ej.grids.Search, ej.grids.Toolbar,
+                    ej.grids.DetailRow);
 
                 // create the date picker
                 utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker =
@@ -345,27 +489,40 @@ utopiasoftware.emap.controller = {
                         // Width for grid
                         width: '100%',
                         allowTextWrap: true,
+                        allowSelection: false,
                         toolbar: ['search'],
                         columns: [
                             { field: 'sno',
-                                headerText: '<div style="color: #f28340; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">S/N</div>',
+                                headerText: '<div style="color: #000000; background-color: #48f2a2; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">S/N</div>',
                                 width: "10%", clipMode: 'ellipsiswithtooltip', customAttributes: {
                                 class: 'toc-grid-sno-column'}
                             },
                             { field: 'subject',
-                                headerText: '<div style="color: #f28340; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">Subject</div>',
+                                headerText: '<div style="color: #000000; background-color: #48f2a2; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">Subject</div>',
                                 width: "30%", clipMode: 'ellipsiswithtooltip', customAttributes: {
                                 class: 'toc-grid-subject-column'}
                             },
                             { field: 'agenda',
-                                headerText: '<div style="color: #f28340; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">Agenda</div>',
+                                headerText: '<div style="color: #000000; background-color: #48f2a2; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase">Agenda</div>',
                                 width: "35%", clipMode: 'ellipsiswithtooltip', customAttributes: {
                                 class: 'toc-grid-agenda-column'}
                             },
                             { field: 'sno',
-                                headerText: '',
-                                width: "25%", template: '#attachments-column-template', clipMode: 'ellipsiswithtooltip'}
+                                headerText: '<div style="color: #000000; background-color: #48f2a2; width: 100%; height: 100%; font-size: 1.2em; text-transform: uppercase"></div>',
+                                width: "25%", template: '#attachments-column-template', clipMode: 'ellipsiswithtooltip',
+                                customAttributes: {
+                                class: 'toc-grid-sno-column'}},
+                            { field: 'extract',
+                                headerText: '', width: "25%", visible: false}
                         ],
+                        rowDataBound: function(rowDataBoundEventArgs){
+                            if(rowDataBoundEventArgs.data.extract && rowDataBoundEventArgs.data.extract == "true"){
+                                rowDataBoundEventArgs.row.classList.add('toc-grid-extract-row');
+                            }
+                            else{
+                                rowDataBoundEventArgs.row.classList.add('toc-grid-row');
+                            }
+                        },
                         dataSource: dataObject.toc,
                         childGrid: {
                             dataSource: dataObject.attachments,
@@ -399,20 +556,22 @@ utopiasoftware.emap.controller = {
                 mainPromiseResolve = mainResolve;
                 mainPromiseReject = mainReject;
 
-                new Promise(function(resolve, reject){ // request file read write permissions
+                /*new Promise(function(resolve, reject){ // request file read write permissions
                     cordova.plugins.diagnostic.requestRuntimePermissions(resolve, reject, [
                         cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE,
                         cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE
                     ])
-                }).
+                })*/
+                Promise.resolve({}).
                 then(function(statuses){
-                    console.log("READ", statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
+                    /*console.log("READ", statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
                     if(! (statuses[cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE] ===
                         cordova.plugins.diagnostic.permissionStatus.GRANTED ||
                         statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE] ===
                         cordova.plugins.diagnostic.permissionStatus.GRANTED)){
                         throw "error";
-                    }
+                    }*/
+
                     return new Promise(function(resolve, reject){ // return the directory where to store the document/image
                         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, resolve, reject);
                     });

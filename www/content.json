@@ -3,17 +3,20 @@
     {
   "sno": "1",
   "subject": "road construction",
-  "agenda": "construction of ringroad "
+  "agenda": "construction of ringroad ",
+   "extract": "false"
 },
   {
     "sno": "2",
     "subject": "road construction",
-    "agenda": "construction of sapele road "
+    "agenda": "construction of sapele road ",
+    "extract": "true"
   },
   {
     "sno": "3",
     "subject": "borehole construction",
-    "agenda": "boreholes were sunk in various local governement areas "
+    "agenda": "boreholes were sunk in various local governement areas ",
+    "extract": "false"
   }],
   "attachments": [
     {
@@ -37,5 +40,5 @@
       "fileurl": "PU_Directory.pdf"
     }
   ],
-  "exco_member_number": 12
+  "meetingtitle": "24th Exco Meeeting"
 }
