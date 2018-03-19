@@ -479,9 +479,12 @@ utopiasoftware.emap.controller = {
             then(function(dataObject){
                 // update meeting title
                 $('#toc-page .toc-meeting-title').html(dataObject.meetingtitle);
-                $('#toc-page #toc-meeting-year').html(new Date().getFullYear());
-                $('#toc-page #toc-meeting-date').html(kendo.toString(new Date(), "d MMMM, yyyy"));
-                $('#toc-page #toc-meeting-long-date').html(kendo.toString(new Date(), "dddd, d MMMM, yyyy"));
+                $('#toc-page #toc-meeting-year').
+                html(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value.getFullYear());
+                $('#toc-page #toc-meeting-date').
+                html(kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, "d MMMM, yyyy"));
+                $('#toc-page #toc-meeting-long-date').
+                html(kendo.toString(utopiasoftware.emap.controller.tocPageViewModel.tocDatePicker.value, "dddd, d MMMM, yyyy"));
 
                 return dataObject; // return the dataObject so that it can be used for the toc Grid
             }).
