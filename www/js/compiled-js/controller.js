@@ -477,6 +477,15 @@ utopiasoftware.emap.controller = {
             utopiasoftware.emap.controller.tocPageViewModel.
             tocFileReader(meetingDateString, "content.json").
             then(function(dataObject){
+                // update meeting title
+                $('#toc-page .toc-meeting-title').html(dataObject.meetingtitle);
+                $('#toc-page #toc-meeting-year').html(new Date().getFullYear());
+                $('#toc-page #toc-meeting-date').html(kendo.toString(new Date(), "d MMMM, yyyy"));
+                $('#toc-page #toc-meeting-long-date').html(kendo.toString(new Date(), "dddd, d MMMM, yyyy"));
+
+                return dataObject; // return the dataObject so that it can be used for the toc Grid
+            }).
+            then(function(dataObject){
                 if(utopiasoftware.emap.controller.tocPageViewModel.tocGrid){ // grid has previously been created
                     // hide spinner
                     utopiasoftware.emap.controller.tocPageViewModel.tocGrid.hideSpinner();
@@ -611,7 +620,7 @@ utopiasoftware.emap.controller = {
                 }).
                 catch(function(err){
                     console.log("ERROR", err);
-                    mainPromiseResolve({toc: [], attachments: []});
+                    mainPromiseResolve({toc: [], attachments: [], meetingtitle: ""});
                 });
             });
 
