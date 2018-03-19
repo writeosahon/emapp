@@ -533,20 +533,14 @@ utopiasoftware.emap.controller = {
                 mainPromiseResolve = mainResolve;
                 mainPromiseReject = mainReject;
 
-                /*new Promise(function(resolve, reject){ // request file read write permissions
-                    cordova.plugins.diagnostic.requestRuntimePermissions(resolve, reject, [
-                        cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE,
-                        cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE
-                    ])
-                })*/
-                Promise.resolve({}).then(function (statuses) {
-                    /*console.log("READ", statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
-                    if(! (statuses[cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE] ===
-                        cordova.plugins.diagnostic.permissionStatus.GRANTED ||
-                        statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE] ===
-                        cordova.plugins.diagnostic.permissionStatus.GRANTED)){
+                new Promise(function (resolve, reject) {
+                    // request file read write permissions
+                    cordova.plugins.diagnostic.requestRuntimePermissions(resolve, reject, [cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE, cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
+                }).then(function (statuses) {
+                    console.log("READ", statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE]);
+                    if (!(statuses[cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE] === cordova.plugins.diagnostic.permissionStatus.GRANTED || statuses[cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE] === cordova.plugins.diagnostic.permissionStatus.GRANTED)) {
                         throw "error";
-                    }*/
+                    }
 
                     return new Promise(function (resolve, reject) {
                         // return the directory where to store the document/image
